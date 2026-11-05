@@ -1,0 +1,239 @@
+/* ---------- Arrival: the moment after a side opens from the landing page ---------- */
+
+/* Sized like .landing, ignoring the page's scrollbar, so the name doesn't jump. */
+.arrive {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100dvh;
+  min-height: 560px;
+  overflow: hidden;
+  font-family: var(--font-display);
+  pointer-events: none;
+}
+
+.arrive .land-tag {
+  animation: arrive-out 0.18s linear both;
+}
+
+@keyframes arrive-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Developer: lines of a file clearing */
+.arrive--developer {
+  color: var(--dev-fg);
+}
+
+.arrive__row {
+  flex: 1;
+  display: block;
+  margin-bottom: -1px; /* no hairlines between rows */
+  background: var(--dev-bg);
+  transform-origin: right;
+}
+
+.arrive__title {
+  position: absolute;
+  inset: 0;
+}
+
+.arrive__cmd {
+  grid-row: 3;
+  grid-column: 1;
+  align-self: start;
+  margin-top: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  line-height: 1.4;
+  color: var(--dev-accent);
+}
+
+.arrive__cmd span {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  padding-right: 3px;
+  border-right: 3px solid currentColor;
+  white-space: nowrap;
+  vertical-align: bottom;
+  animation: arrive-type 0.34s steps(var(--chars)) 0.08s forwards;
+}
+
+@keyframes arrive-type {
+  to {
+    width: calc(var(--chars) * 1ch + 6px);
+  }
+}
+
+/* Creative: a playhead scrubbing across the edit */
+.arrive--creative {
+  color: var(--cre-fg);
+}
+
+.arrive__panel {
+  position: absolute;
+  inset: 0;
+  background: var(--cre-bg);
+}
+
+.arrive__clips {
+  grid-row: 3;
+  grid-column: 1;
+  align-self: start;
+  display: flex;
+  gap: 6px;
+  width: min(60vw, 360px);
+  height: 14px;
+  margin-top: 1.8rem;
+}
+
+.arrive__clips .clip {
+  transform-origin: left;
+  animation: arrive-clip 0.3s var(--ease) both;
+}
+
+.arrive__clips .clip--cyan {
+  flex: 3;
+  animation-delay: 0.05s;
+}
+
+.arrive__clips .clip--pink {
+  flex: 2;
+  animation-delay: 0.14s;
+}
+
+.arrive__clips .clip--sun {
+  flex: 4;
+  animation-delay: 0.23s;
+}
+
+@keyframes arrive-clip {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.arrive__playhead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--cre-pink);
+}
+
+.arrive__playhead::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -8px;
+  width: 18px;
+  height: 14px;
+  background: var(--cre-pink);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.arrive__code {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--cre-pink);
+  color: var(--cre-bg);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* The page underneath comes in as the overlay clears. --t is when it starts. */
+.is-arriving--seam {
+  --t: 0.7s;
+}
+
+.is-arriving--switch {
+  --t: 0s;
+}
+
+.is-arriving .site-nav,
+.is-arriving .dev-hero__copy > *,
+.is-arriving .term,
+.is-arriving .dev-facts,
+.is-arriving .cre-hero__title,
+.is-arriving .cre-hero__row,
+.is-arriving .tl {
+  animation: arrive-rise 0.55s var(--ease) both;
+}
+
+.is-arriving .site-nav {
+  animation-name: arrive-drop;
+  animation-delay: calc(var(--t) + 0.15s);
+}
+
+/* The switch is mid-slide across the crossing, so the nav stays where it is. */
+.is-arriving--switch .site-nav {
+  animation: none;
+}
+
+.is-arriving .dev-hero__title {
+  animation-delay: var(--t);
+}
+
+.is-arriving .dev-hero__copy .prose {
+  animation-delay: calc(var(--t) + 0.1s);
+}
+
+.is-arriving .dev-hero__actions {
+  animation-delay: calc(var(--t) + 0.2s);
+}
+
+.is-arriving .term {
+  animation-delay: calc(var(--t) + 0.15s);
+}
+
+/* The first command prints once the terminal has landed. */
+.is-arriving .term__intro .term__line {
+  animation-delay: calc(var(--t) + 0.4s + var(--i) * 0.07s);
+}
+
+.is-arriving .dev-facts {
+  animation-delay: calc(var(--t) + 0.3s);
+}
+
+.is-arriving .cre-hero__title {
+  animation-delay: calc(var(--t) + 0.05s);
+}
+
+.is-arriving .cre-hero__row {
+  animation-delay: calc(var(--t) + 0.2s);
+}
+
+.is-arriving .tl {
+  animation-delay: calc(var(--t) + 0.3s);
+}
+
+.is-arriving .tl__lane .clip {
+  transform-origin: left;
+  animation: arrive-clip 0.5s var(--ease) calc(var(--t) + 0.4s) both;
+}
+
+@keyframes arrive-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}
+
+@keyframes arrive-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}

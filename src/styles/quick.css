@@ -1,0 +1,82 @@
+/* ---------- Quick view ---------- */
+
+.quick__main {
+  max-width: 860px;
+  padding-block: clamp(24px, 5vw, 56px) 72px;
+}
+
+.quick__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: 28px;
+}
+
+.quick__name {
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+/* The resume, with its printed links laid over the image */
+.resume {
+  position: relative;
+  border: 2px solid var(--dev-fg);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.25s var(--ease);
+}
+
+.resume__page {
+  display: block;
+}
+
+.resume__page img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.resume__link {
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  width: calc(var(--w) * 100%);
+  height: calc(var(--h) * 100%);
+  border-radius: 3px;
+  transition: background 0.15s var(--ease);
+}
+
+.resume__link:hover,
+.resume__link:focus-visible {
+  background: color-mix(in srgb, var(--cre-pink) 30%, transparent);
+}
+
+@media print {
+  .site-nav,
+  .site-footer,
+  .skip-link,
+  .quick__head {
+    display: none;
+  }
+
+  body,
+  .theme-dev {
+    background: #fff;
+    color: #000;
+  }
+
+  .quick__main {
+    padding-block: 0;
+  }
+
+  .resume {
+    border: 0;
+    border-radius: 0;
+  }
+}
